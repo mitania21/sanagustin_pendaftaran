@@ -1,0 +1,40 @@
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hero-section .content {
+    animation: fadeInUp 1s ease-out both;
+}
+
+@media (prefers-color-scheme: dark) {
+    body {
+        background-color: #121212;
+        color: #ffffff;
+    }
+
+    .navbar,
+    footer {
+        background-color: #1f1f1f !important;
+    }
+
+    .card {
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    .btn-gradient {
+        background: linear-gradient(45deg, #bb86fc, #6200ee);
+    }
+
+    .btn-gradient:hover {
+        background: linear-gradient(45deg, #9b5de5, #5f0ee6);
+    }
+}

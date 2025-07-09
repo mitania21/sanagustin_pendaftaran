@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Universitas Katolik Santo Agustinus Hippo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .form-box {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
+            max-width: 600px;
+            margin: 60px auto;
+        }
+
+        .btn-register {
+            background-color: #4e73df;
+            color: white;
+        }
+
+        .btn-register:hover {
+            background-color: #3752c9;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 15px;
+            margin-top: 60px;
+            border-top: 1px solid #ddd;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="images/logo.jpg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
+            <strong>SANAGUSTIN</strong>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="data.html">Data</a></li>
+                <li class="nav-item"><a class="nav-link active" href="register.html">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="form-box">
+        <h4 class="mb-4 text-center">Formulir Pendaftaran</h4>
+        <form action="save.php" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <div class="mb-3">
+                <label for="nama" class="form-label">Nama Lengkap</label>
+                <input type="text" class="form-control" id="nama" name="nama">
+            </div>
+            <div class="mb-3">
+                <label for="nim" class="form-label">NIM</label>
+                <input type="text" class="form-control" id="nim" name="nim">
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email">
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Upload Foto</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+            <div class="text-end">
+                <button type="submit" class="btn btn-register">Kirim</button>
+            </div>
+        </form>
+    </div>
+
+    <footer>
+        &copy;copyright 2025 - Universitas Katolik Santo Agustinus Hippo
+    </footer>
+
+    <script>
+        function validateForm() {
+            const nama = document.getElementById("nama").value.trim();
+            const nim = document.getElementById("nim").value.trim();
+            const email = document.getElementById("email").value.trim();
+            const image = document.getElementById("image").value.trim();
+
+            if (!nama || !nim || !email || !image) {
+                alert("Semua field wajib diisi termasuk foto!");
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+
+</html>

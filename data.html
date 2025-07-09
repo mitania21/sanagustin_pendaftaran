@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Data Pendaftar - Universitas Katolik Santo Agustinus Hippo</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        body {
+            background-color: #f0f4f8;
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .container-box {
+            background-color: #e8f0fe;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            animation: fadeIn 0.6s ease;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+            border-top: 1px solid #ddd;
+        }
+
+        .table th,
+        .table td {
+            vertical-align: middle;
+        }
+
+        /* Animasi fade-in */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        // Proteksi akses halaman jika belum login
+        if (localStorage.getItem("isLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="images/logo.jpg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
+            <strong>SANAGUSTIN</strong>
+        </a>
+        <div class="collapse navbar-collapse">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item" id="dataNavItem"><a class="nav-link active" href="data.html">Data</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+                <li class="nav-item" id="authLink"></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Script untuk login/logout toggle -->
+    <script>
+        const authLink = document.getElementById("authLink");
+        if (localStorage.getItem("isLoggedIn") === "true") {
+            authLink.innerHTML = '<a class="nav-link text-danger fade-in" href="#" onclick="logout()">Logout</a>';
+        } else {
+            authLink.innerHTML = '<a class="nav-link text-success fade-in" href="login.html">Login</a>';
+        }
+    </script>
+
+    <!-- Data Section -->
+    <div class="container py-5">
+        <div class="container-box mx-auto">
+            <h3 class="mb-4">Data Pendaftar</h3>
+            <div class="mb-3">
+                <input type="text" id="searchInput" class="form-control" placeholder="Search..."
+                    onkeyup="searchTable()">
+            </div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-light">
+                        <tr>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>NIM</th>
+                            <th>Email</th>
+                            <th>Image</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="dataTableBody">
+                        <!-- JavaScript will inject data here -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Foto -->
+    <div class="modal fade" id="fotoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-transparent border-0 text-center">
+                <img id="modalFoto" src="" class="img-fluid rounded" alt="Preview Foto">
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Data</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editIndex">
+                        <div class="mb-3">
+                            <label for="editNama" class="form-label">Nama</label>
+                            <input type="text" class="form-control" id="editNama" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editNim" class="form-label">NIM</label>
+                            <input type="text" class="form-control" id="editNim" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="editEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        &copy;copyright 2025 - Universitas Katolik Santo Agustinus Hippo
+    </footer>
+
+    <!-- Script -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function logout() {
+            localStorage.removeItem("isLoggedIn");
+            window.location.href = "login.html";
+        }
+
+        let dataPendaftar = [];
+
+        const tableBody = document.getElementById("dataTableBody");
+
+        function renderTable(data) {
+            tableBody.innerHTML = "";
+            data.forEach((item, index) => {
+                const row = `
+          <tr class="fade-in">
+            <td>${index + 1}</td>
+            <td>${item.nama}</td>
+            <td>${item.nim}</td>
+            <td>${item.email}</td>
+            <td>
+              <img src="${item.image}" alt="Foto" style="height:60px; cursor:pointer; border-radius:5px;" onclick="showImageModal('${item.image}')">
+            </td>
+            <td>
+              <a href="edit.html?index=${index}" class="text-primary me-2">Edit</a>
+              <a href="#" class="text-danger" onclick="deleteData(${index})">Delete</a>
+            </td>
+          </tr>
+        `;
+                tableBody.innerHTML += row;
+            });
+        }
+
+        function searchTable() {
+            const keyword = document.getElementById("searchInput").value.toLowerCase();
+            const filtered = dataPendaftar.filter(d =>
+                d.nama.toLowerCase().includes(keyword) ||
+                d.nim.toLowerCase().includes(keyword) ||
+                d.email.toLowerCase().includes(keyword)
+            );
+            renderTable(filtered);
+        }
+
+        function openEdit(index) {
+            const item = dataPendaftar[index];
+            document.getElementById("editIndex").value = index;
+            document.getElementById("editNama").value = item.nama;
+            document.getElementById("editNim").value = item.nim;
+            document.getElementById("editEmail").value = item.email;
+            const editModal = new bootstrap.Modal(document.getElementById("editModal"));
+            editModal.show();
+        }
+
+        function deleteData(index) {
+            if (confirm("Yakin ingin menghapus data ini?")) {
+                dataPendaftar.splice(index, 1);
+                fetch('save.php', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataPendaftar)
+                }).then(() => renderTable(dataPendaftar));
+            }
+        }
+
+        function showImageModal(src) {
+            document.getElementById("modalFoto").src = src;
+            new bootstrap.Modal(document.getElementById("fotoModal")).show();
+        }
+
+        document.getElementById("editForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const index = document.getElementById("editIndex").value;
+            dataPendaftar[index] = {
+                ...dataPendaftar[index],
+                nama: document.getElementById("editNama").value,
+                nim: document.getElementById("editNim").value,
+                email: document.getElementById("editEmail").value
+            };
+
+            fetch('save.php', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(dataPendaftar)
+            }).then(() => {
+                bootstrap.Modal.getInstance(document.getElementById("editModal")).hide();
+                renderTable(dataPendaftar);
+            });
+        });
+
+        fetch('load.php')
+            .then(res => res.json())
+            .then(data => {
+                dataPendaftar = data;
+                renderTable(data);
+            });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home - Universitas Katolik Santo Agustinus Hippo</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet" />
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar-brand strong {
+            font-weight: 700;
+        }
+
+        .navbar {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-section {
+            background: url('images/bg.jpg') center/cover no-repeat;
+            position: relative;
+            padding: 100px 20px;
+            overflow: hidden;
+        }
+
+        .hero-section .overlay {
+            background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7));
+            z-index: 1;
+        }
+
+        .hero-section .content {
+            z-index: 2;
+            position: relative;
+            animation: fadeInUp 1s ease-out both;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.6);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+
+            .btn-gradient {
+                padding: 10px 25px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .btn-gradient {
+            background: linear-gradient(45deg, #4e73df, #6f42c1);
+            color: white;
+            border: none;
+            border-radius: 50px;
+            padding: 12px 35px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(45deg, #3752c9, #5935a6);
+            transform: scale(1.05);
+            color: white;
+        }
+
+        .img-fixed {
+            height: 180px;
+            object-fit: cover;
+            width: 100%;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+
+        .card {
+            border: none;
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            border-top: 1px solid #ddd;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background-color: #121212;
+                color: #ffffff;
+            }
+
+            .navbar,
+            footer {
+                background-color: #1f1f1f !important;
+            }
+
+            .card {
+                background-color: #1e1e1e;
+                color: #fff;
+            }
+
+            .btn-gradient {
+                background: linear-gradient(45deg, #bb86fc, #6200ee);
+            }
+
+            .btn-gradient:hover {
+                background: linear-gradient(45deg, #9b5de5, #5f0ee6);
+            }
+        }
+    </style>
+</head>
+
+<body class="d-flex flex-column min-vh-100">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light px-4">
+        <a class="navbar-brand d-flex align-items-center" href="#">
+            <img src="images/logo.jpg" alt="Logo" width="40" height="40" class="me-2 rounded-circle">
+            <strong>SANAGUSTIN</strong>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="data.html">Data</a></li>
+                <li class="nav-item"><a class="nav-link" href="register.html">Register</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="hero-section position-relative">
+        <div class="overlay position-absolute top-0 start-0 w-100 h-100"></div>
+        <div class="content position-relative text-white text-center">
+            <h1 class="mb-4">Welcome to <br> Universitas Katolik Santo Agustinus Hippo</h1>
+            <a href="register.html" class="btn btn-gradient btn-lg">Register</a>
+        </div>
+    </div>
+
+    <!-- Section Artikel -->
+    <div class="container text-center py-5 flex-grow-1">
+        <div class="row row-cols-1 row-cols-md-4 g-4">
+            <div class="col">
+                <div class="card h-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalArtikel1"
+                    style="cursor:pointer;">
+                    <img src="images/placeholder1.jpeg" class="img-fixed card-img-top" alt="Ilustrasi">
+                    <div class="card-body">
+                        <p class="card-text">Kehidupan kampus yang menyenangkan dan inspiratif.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalArtikel2"
+                    style="cursor:pointer;">
+                    <img src="images/placeholder2.jpeg" class="img-fixed card-img-top" alt="Ilustrasi">
+                    <div class="card-body">
+                        <p class="card-text">Program studi unggulan kami.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalArtikel3"
+                    style="cursor:pointer;">
+                    <img src="images/placeholder3.jpeg" class="img-fixed card-img-top" alt="Ilustrasi">
+                    <div class="card-body">
+                        <p class="card-text">Beragam kegiatan mahasiswa aktif dan seru.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card h-100 shadow-sm" data-bs-toggle="modal" data-bs-target="#modalArtikel4"
+                    style="cursor:pointer;">
+                    <img src="images/placeholder4.jpeg" class="img-fixed card-img-top" alt="Ilustrasi">
+                    <div class="card-body">
+                        <p class="card-text">Lingkungan belajar yang nyaman dan modern.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="text-center py-3 mt-auto">
+        &copy; 2025 - Universitas Katolik Santo Agustinus Hippo
+    </footer>
+
+    <!-- Modal Artikel 1 -->
+    <div class="modal fade" id="modalArtikel1" tabindex="-1" aria-labelledby="modalArtikel1Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArtikel1Label">Kehidupan Kampus</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/placeholder1.jpeg" class="img-fluid mb-3 rounded" alt="Kehidupan Kampus">
+                    <p>Universitas Katolik Santo Agustinus Hippo menawarkan lingkungan akademik yang ramah, inspiratif,
+                        dan spiritual. Mahasiswa bebas menyalurkan minat dalam berbagai kegiatan organisasi, seni, dan
+                        pelayanan masyarakat.</p>
+                    <p>Dengan fasilitas lengkap seperti perpustakaan digital, ruang diskusi, dan laboratorium modern,
+                        kampus ini mendukung pengembangan karakter dan kompetensi mahasiswa secara holistik.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Artikel 2 -->
+    <div class="modal fade" id="modalArtikel2" tabindex="-1" aria-labelledby="modalArtikel2Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArtikel2Label">Program Studi Unggulan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/placeholder2.jpeg" class="img-fluid mb-3 rounded" alt="Program Studi">
+                    <p>Kami memiliki program studi unggulan yang dirancang untuk menjawab tantangan dunia kerja masa
+                        kini, seperti Teknik Informatika, Manajemen, dan Ilmu Komunikasi.</p>
+                    <p>Setiap program dirancang dengan pendekatan praktis, kurikulum berbasis industri, serta dosen
+                        berpengalaman yang siap membimbing mahasiswa hingga menjadi lulusan siap pakai.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Artikel 3 -->
+    <div class="modal fade" id="modalArtikel3" tabindex="-1" aria-labelledby="modalArtikel3Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArtikel3Label">Kegiatan Mahasiswa</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/placeholder3.jpeg" class="img-fluid mb-3 rounded" alt="Kegiatan Mahasiswa">
+                    <p>Mahasiswa aktif dalam berbagai kegiatan seperti UKM, klub debat, olahraga, paduan suara, dan
+                        pengabdian masyarakat. Ini adalah tempat ideal untuk bertumbuh sebagai pemimpin masa depan.</p>
+                    <p>Setiap kegiatan didukung oleh kampus agar mampu membentuk karakter, kepercayaan diri, dan
+                        keterampilan sosial yang baik.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Artikel 4 -->
+    <div class="modal fade" id="modalArtikel4" tabindex="-1" aria-labelledby="modalArtikel4Label" aria-hidden="true">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalArtikel4Label">Lingkungan Belajar</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
+                </div>
+                <div class="modal-body">
+                    <img src="images/placeholder4.jpeg" class="img-fluid mb-3 rounded" alt="Lingkungan Belajar">
+                    <p>Suasana belajar yang kondusif, tenang, dan didukung teknologi modern membuat proses belajar
+                        menjadi lebih efektif dan menyenangkan.</p>
+                    <p>Kampus ini juga memiliki ruang terbuka hijau dan area refleksi spiritual yang mendukung
+                        keseimbangan antara akademik dan kesejahteraan mental mahasiswa.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
